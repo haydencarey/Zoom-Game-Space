@@ -1,0 +1,23 @@
+{
+    "name": "week_9",
+    "version": "1.0.0",
+    "description": "1. Setup the express server with a public folder",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^2.3.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
+
+}

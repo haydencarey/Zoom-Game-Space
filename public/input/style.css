@@ -1,0 +1,168 @@
+            body {
+                background-color: #191970;
+                font-family: Space Mono;
+                color: whitesmoke;
+            }
+            
+            h1 {
+                font-family: Space Age;
+                justify-content: center;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                text-align: center;
+                align-items: center;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 4rem;
+            }
+            /* p {
+            margin-left: 35%;
+        } */
+            
+            .click-here {
+                text-align: center;
+            }
+            
+            .container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                text-align: center;
+                flex-flow: row nowrap;
+            }
+            
+            #defaultCanvas0 {
+                width: 51%;
+                height: 548px;
+            }
+            
+            .chat-input {
+                display: flex;
+                flex-direction: row;
+                width: 92%;
+                margin: 0 auto;
+            }
+            
+            .chat-feed {
+                flex-direction: column;
+                align-items: left;
+            }
+            
+            input {
+                display: inline;
+                padding: 5px;
+                margin: 10px 10px 0 0;
+                height: 20px;
+            }
+            
+            .chat-input-name {
+                width: 20%;
+            }
+            
+            .chat-input-msg {
+                width: 65%;
+            }
+            
+            .sub-container {
+                width: 50%;
+            }
+            
+            button {
+                height: 28px;
+                margin-top: 10px;
+            }
+            
+            .mission-header {
+                margin-top: 10px;
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .mission-box {
+                border: 7px solid whitesmoke;
+                display: flex;
+                height: 300px;
+                margin-left: 25px;
+                margin-right: 25px;
+                padding-left: 5px;
+                overflow: auto;
+            }
+            
+            .chat-header {
+                margin-top: 10px;
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .chat-box {
+                border: 7px solid whitesmoke;
+                height: 300px;
+                margin-left: 25px;
+                margin-right: 25px;
+                padding-left: 5px;
+                overflow: auto;
+            }
+            
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            canvas {
+                display: block;
+                margin-top: 50px;
+                margin-left: 50px;
+                margin-right: 50px;
+            }
+            
+            .notes-header {
+                margin-top: 10px;
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .notes-box {
+                border: 7px solid whitesmoke;
+                display: flex;
+                height: 300px;
+                margin-left: 25px;
+                margin-right: 25px;
+                padding-left: 5px;
+                overflow: auto;
+            }
+            
+            textarea {
+                margin: 0px;
+                height: 299px;
+                width: 100%;
+                margin-left: -14px;
+                margin-top: 10%;
+                resize: none;
+            }
+            
+            .name-lifeform {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .life-form {
+                margin: auto;
+            }
+            
+            .lifeform-header {
+                margin-top: 3%;
+                text-align: unset;
+            }
+            
+            #note-input {
+                margin: 0px;
+                height: 158px;
+                width: 100%;
+                margin-left: -8px;
+            }
+            
+            .notesBoxMsgs {
+                margin: 60px 45px;
+            }

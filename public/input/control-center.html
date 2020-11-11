@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPANION</title>
+    <link href="style2.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+    <h1>
+        <span id="heading-name"></span> Control Center
+    </h1>
+
+    <div class="frame">
+        <div class="left-side">
+            <div class="all-buttons">
+                <div class="buttons">
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                </div>
+
+                <div class="buttons2">
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                </div>
+
+                <div class="buttons3">
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                </div>
+            </div>
+            <div class="all-switches">
+                <div class="first-switches">
+                    <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+                    <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+                </div>
+
+                <div class="second-switches">
+                    <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+                    <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+                </div>
+
+            </div>
+
+            <div class="rocket-button">
+                <div class="rocket-insertion">Lunar Rocket Insertion</div>
+                <button id="moon-button" class="button_control1" style="background: #99ff99"> </button>
+            </div>
+        </div>
+
+        <!--inject center-->
+        <div class="container">
+            <div class="sub-container mission-feed">
+                <div class="mission-header">Travel View</div>
+                <div class="mission-box" id="views-box">
+                </div>
+                <button id="views-button">Next Stage</button>
+            </div>
+
+
+        </div>
+
+
+
+
+        <!--inject right-->
+
+        <div class="right-side">
+            <div class="all-sliders">
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="1000" step="1" class="slider1">
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="1000" step="1" value="200" class="slider2">
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="1000" step="1" value="800" class="slider3">
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="1000" step="1" class="slider4">
+                </div>
+            </div>
+
+            <div class="gif">
+                <img src="shuttle.gif" alt="Space Shuttle" class="shuttle-gif">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="canvas-area">
+        <div class="manual-control">Manual Control</div>
+        <div class="read-container">
+
+            <div class="sub-container1">
+
+            </div>
+
+            <div class="sub-container2">
+                <div class="read-header">Mission Data</div>
+                <div class="data-box" id="data-box">
+
+                </div>
+                <button id="data-button">Get Data</button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- <div class="manual-button_controls"> Manual Controls</div> -->
+
+    <!-- <div class="game-header">Manual Control</div> -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/addons/p5.dom.min.js"></script>
+    <script type="text/javascript " src="/socket.io/socket.io.js "></script>
+    <script src="appViewsJSON.js"></script>
+    <script src="sketch1.js"></script>
+    <script src="ship.js"></script>
+    <script src="asteroid.js"></script>
+    <script src="laser.js"></script>
+    <script src="appButtons.js"></script>
+
+    <!-- <script src="appShare.js"></script> -->
+
+</body>
+
+</html>

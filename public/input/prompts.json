@@ -1,0 +1,44 @@
+[{
+        "id": "stage-1",
+        "stage": "Stage 1",
+        "name": "Mission Objective",
+        "info": "As biologists, our objective is to safely land on Kepler 186f and collect research on whether Kepler 186 f is capable of hosting life "
+    },
+    {
+        "id": "stage-2",
+        "stage": "Stage 2",
+        "name": "The Spacecraft",
+        "info": "Where you are, turn around and select your spacecraft. Keep the considerations in mind."
+    },
+    {
+        "id": "stage-3",
+        "stage": "Stage 3",
+        "name": "Spacecraft Sketches and it's Capabilities",
+        "info": "Sketch your spacecraft in your designated at the bottom of the page. In the intercom, inform the team of it's capabilities"
+    },
+    {
+        "id": "stage-4",
+        "stage": "Stage 4",
+        "name": "Spacecraft Feedback",
+        "info": "In the intercom, provide feedback on your team's spacecraft selection. What do you think of the team's spacecraft?"
+    },
+    {
+        "id": "stage-5",
+        "stage": "Stage 5",
+        "name": "Interplanetary Travel",
+        "info": "Get ready for take-off. Everyone, please settle into your control centers. Make sure your helmet is on and secure. Be prepared for intense G forces and turbulence."
+    },
+    {
+        "id": "stage-6",
+        "stage": "",
+        "name": "",
+        "info": "Interplanetary Travel in Progress"
+    },
+    {
+        "id": "stage-6",
+        "stage": "Stage 6",
+        "name": "Planet Utu",
+        "info": "Search Planet Utu for a life form. Once you find something, record your notes in the Life Observations Box below"
+    }
+
+]
