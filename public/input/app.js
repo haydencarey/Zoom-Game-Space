@@ -1,11 +1,7 @@
-// var playerName = prompt('Enter the name you want to register for playing?');
-// while (!playerName) {
-//     playerName = prompt('Enter the name you want to register for playing?');
-// }
 window.addEventListener('load', function() {
 
 
-
+    //create url paramter
     const urlParams = new URLSearchParams(window.location.search);
     const password = urlParams.get('password');
     const nextStepBtn = document.getElementById('mission-button');
@@ -40,7 +36,7 @@ window.addEventListener('load', function() {
         console.log(data);
 
         //Create a message string and page element
-        let receivedMsg = data.name + ": " + data.msg;
+        let receivedMsg = data.name + ":" + "<br>" + data.msg;
         let msgEl = document.createElement('p');
         msgEl.innerHTML = receivedMsg;
 
@@ -51,14 +47,17 @@ window.addEventListener('load', function() {
     });
 
     /* --- Code to SEND a socket message to the Server ---  */
-    let nameInput = document.getElementById('name-input')
+    // let nameInput = document.getElementById('name-input')
     let msgInput = document.getElementById('msg-input');
     let sendButton = document.getElementById('send-button');
 
     sendButton.addEventListener('click', function() {
-        let curName = nameInput.value;
+        // let curName = nameInput.value;
         let curMsg = msgInput.value;
-        let msgObj = { "name": curName, "msg": curMsg };
+        let msgObj = {
+            "name": namePrompt,
+            "msg": curMsg
+        };
 
 
         // send the message object to the server

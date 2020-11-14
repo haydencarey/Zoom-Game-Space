@@ -6,6 +6,7 @@ nextStepBtn.style.display = 'none';
 let count = 0;
 const urlParams = new URLSearchParams(window.location.search);
 const password = urlParams.get('password');
+let audio2 = new Audio('falcon.mp3');
 
 let socket = io();
 
@@ -30,9 +31,13 @@ function renderData(views, count) {
     missionBox.innerHTML = "<p><b>" + views[count].stage + "</b><br /><br />"
 
     if (views[count].video) {
-        missionBox.innerHTML = `  <iframe class="video" width="420" height="315" src=${views[count].video}frameborder=“0" allowfullscreen include> </iframe>`
+        missionBox.innerHTML = `  <iframe class="video" width="420" height="315" src=${views[count].video}> </iframe>`
+        audio2.play();
     } else {
         missionBox.innerHTML = `<img class="my-img" src=${ views[count].link}> `
+        audio2.pause();
+        audio2.currentTime = 0
+
     }
 }
 
@@ -49,6 +54,7 @@ window.addEventListener('load', function() {
             // let count = 0
             if (views) {
                 viewsButton.addEventListener('click', function() {
+
                         //send the user's password and count to the server in an object
                         socket.emit('next_step_view', {
                             password,

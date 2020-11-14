@@ -1,6 +1,9 @@
 var ship;
 var asteroids = [];
 var lasers = [];
+let x;
+let audio3 = new Audio('alien.mp3');
+
 
 //create socket connection
 //check if other people are there ( i need to get initial number)
@@ -10,7 +13,8 @@ var lasers = [];
 function setup() {
     createCanvas(580, 403);
     ship = new Ship();
-    for (var i = 0; i < 5; i++) {
+    x = 5;
+    for (var i = 0; i < x; i++) {
         asteroids.push(new Asteroid());
     }
 }
@@ -22,11 +26,18 @@ function draw() {
     for (var i = 0; i < asteroids.length; i++) {
         if (ship.hits(asteroids[i])) {
             console.log('ooops!');
+            // asteroids.push(new Asteroid());
+            // audio3.play();
+
+
+
         }
         asteroids[i].render();
         asteroids[i].update();
         asteroids[i].edges();
     }
+
+
 
     for (var i = lasers.length - 1; i >= 0; i--) {
         lasers[i].render();

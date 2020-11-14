@@ -26,7 +26,7 @@ window.addEventListener('load', function() {
         console.log(data.notes)
 
         //Create a message string and page element
-        let recievedNote = namePrompt + "<br><br>" + data.lifeform + "<br><br>" + data.notes;
+        let recievedNote = data.name + "<br><br>" + data.lifeform + "<br><br>" + data.notes;
         let notesEl = document.createElement('p');
         notesEl.classList.add("notesBoxMsgs");
         notesEl.innerHTML = recievedNote;
@@ -49,6 +49,7 @@ window.addEventListener('load', function() {
         let lifeForm = lifeformInput.value;
         let notesMsg = notesInput.value;
         let notesObj = {
+            "name": namePrompt,
             "lifeform": lifeForm,
             "notes": notesMsg
         };
