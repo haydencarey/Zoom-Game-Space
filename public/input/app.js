@@ -2,9 +2,9 @@ window.addEventListener('load', function() {
 
 
     //create url paramter
-    const urlParams = new URLSearchParams(window.location.search);
-    const password = urlParams.get('password');
-    const nextStepBtn = document.getElementById('mission-button');
+    let urlParams = new URLSearchParams(window.location.search);
+    let password = urlParams.get('password');
+    let nextStepBtn = document.getElementById('mission-button');
     // nextStepBtn.style.display = 'none';
     // var socketId = null;
 
@@ -12,9 +12,8 @@ window.addEventListener('load', function() {
     let socket = io();
     //Listen for confirmation of connection
     socket.on('connect', function() {
-        // console.log("Connected with socketId: " + socket.id);
-        // socketId = socket.id;
-        // check to see if password is correct and send the password authentication to the server
+
+        // check to see if password is inputted and send the password authentication to the server
         if (password) {
             socket.emit('authentication', { password });
         }

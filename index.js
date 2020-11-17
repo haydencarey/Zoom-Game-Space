@@ -39,20 +39,15 @@ io.sockets.on('connection', function(socket) {
         //Send a response to all clients, including this one
         io.sockets.emit('msg', data);
 
-        //Send a response to all other clients, not including this one
-        // socket.broadcast.emit('msg', data);
-
-        //Send a response to just this client
-        // socket.emit('msg', data);
-
     });
+    //listening for audioObh from the client
     socket.on('audioObj', function(data) {
         console.log("Received a 'audioObj' event");
         console.log(data);
+        //Send audio response to all clients, including this one
         io.sockets.emit('audioObj', data);
 
     })
-
 
     //Listen for a message named 'notesMsg' from this client
     socket.on('notesMsg', function(data) {
@@ -62,12 +57,6 @@ io.sockets.on('connection', function(socket) {
 
         //Send a response to all clients, including this one
         io.sockets.emit('notesMsg', data);
-
-        //Send a response to all other clients, not including this one
-        // socket.broadcast.emit('msg', data);
-
-        //Send a response to just this client
-        // socket.emit('msg', data);
 
     });
 
@@ -80,12 +69,6 @@ io.sockets.on('connection', function(socket) {
         //Send the data to all clients, including this one
         //Set the name of the message to be 'data'
         io.sockets.emit('data', data);
-
-        //Send the data to all other clients, not including this one
-        // socket.broadcast.emit('data', data);
-
-        //Send the data to just this client
-        // socket.emit('data', data);
     });
 
     //Listen for a message named 'next_step' from this client

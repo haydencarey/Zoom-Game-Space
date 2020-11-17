@@ -19,14 +19,14 @@ socket.on('connect', function() {
     }
 });
 
-//if true and the user is the "host", display the button, otherwise don't
+//if true and the user is the "host", display the button, otherwise, don't.
 socket.on('authentication', function(data) {
     if (data === true) {
         nextStepBtn.style.display = 'inline-block';
     }
 });
 
-function renderData(views, count) {
+function renderImage(views, count) {
 
     missionBox.innerHTML = "<p><b>" + views[count].stage + "</b><br /><br />"
 
@@ -85,7 +85,7 @@ window.addEventListener('load', function() {
                     //listen to message from the server and execute renderData function
                 socket.on('next_step_view', function(cnt) {
 
-                    renderData(views, cnt);
+                    renderImage(views, cnt);
                     count++;
                     if (count == views.length) {
                         count = 0;

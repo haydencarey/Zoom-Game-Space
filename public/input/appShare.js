@@ -58,7 +58,6 @@ window.addEventListener('load', function() {
 
         console.log(notesInput.value)
 
-
         // send the notes message object to the server
         socket.emit('notesMsg', notesObj);
     });
