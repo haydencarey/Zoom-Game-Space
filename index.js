@@ -88,6 +88,17 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
+    socket.on('game-started', function(obj) {
+        console.log('game-started', obj)
+
+        io.emit('start', { id: 23 });
+    })
+
+    socket.on('data-button', function(obj) {
+        console.log('game-started', obj)
+
+        io.emit('buttonPressed', { id: 23 });
+    })
 
     //Listen for this client to disconnect
     socket.on('disconnect', function() {

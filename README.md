@@ -82,7 +82,3 @@ I am looking forward to playtesting my Zoom experience with the cohort and conti
 
 
 
-
-Documentation (25pts): 
-Provides a clear description of the project, production decisions (i.e. technical, design, conceptual, creative etc), influences and inspiration, key challenges and solutions, overall lessons learned as well as potential next steps, and relevant references/resources that were utilized. 
-Appropriate attribution must be provided to noteworthy material utilized in service of  the research, production and delivery of the project

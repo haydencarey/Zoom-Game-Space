@@ -58,7 +58,6 @@
         .sub-container1 {
             width: 50%;
             position: relative;
-            border: 1px solid inherit;
         }
         
         .sub-container2 {
@@ -149,7 +148,7 @@
         
         #defaultCanvas0 {
             border: 5px solid whitesmoke;
-            margin-top: -438px;
+            margin-top: -414px;
             margin-left: 2%;
             margin-right: 5%;
             margin-bottom: 50px;
@@ -391,6 +390,8 @@
             position: relative;
             left: 39%;
         }
+        /* #manual-control {}
+         */
         
         @media screen and (max-width:1140px) {
             .read-container {
@@ -405,4 +406,12 @@
                 top: 450px;
                 margin: 0 auto;
             }
+        }
+        
+        #asteroid-button {
+            display: none;
+        }
+        
+        #data-button {
+            display: none;
         }

@@ -1,8 +1,8 @@
 let views = [];
 const singleView = {}
 let missionBox = document.getElementById('views-box');
-let nextStepBtn = document.getElementById('views-button');
-nextStepBtn.style.display = 'none';
+let viewsBtn = document.getElementById('views-button');
+viewsBtn.style.display = 'none';
 let count = 0;
 const urlParams = new URLSearchParams(window.location.search);
 const password = urlParams.get('password');
@@ -22,7 +22,7 @@ socket.on('connect', function() {
 //if true and the user is the "host", display the button, otherwise, don't.
 socket.on('authentication', function(data) {
     if (data === true) {
-        nextStepBtn.style.display = 'inline-block';
+        viewsBtn.style.display = 'inline-block';
     }
 });
 
