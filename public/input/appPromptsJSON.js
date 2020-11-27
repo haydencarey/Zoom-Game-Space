@@ -10,8 +10,8 @@ const password = urlParams.get('password');
 let socket = io();
 
 function nextStep(prompts, count) {
-    missionBox.innerHTML = "<p ><b>" + prompts[count].stage + "</b><br /><br />" +
-        prompts[count].name + "<br /><br />" + prompts[count].info + "</p>";
+    missionBox.innerHTML = "<p ><b>" + prompts[count.count].stage + "</b><br /><br />" +
+        prompts[count.count].name + "<br /><br />" + prompts[count.count].info + "</p>";
 }
 
 window.addEventListener('load', function() {
@@ -45,6 +45,7 @@ window.addEventListener('load', function() {
                 if (count == prompts.length) {
                     count = 0;
                 }
+
             });
 
 

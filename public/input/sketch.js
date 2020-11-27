@@ -13,7 +13,7 @@ function setup() {
 
             fill('black');
             textSize(15);
-            text('Biologist 1', width / 6, height / 40);
+            text('CapCom Hayden', width / 6, height / 40);
             textAlign(CENTER, CENTER);
 
             textSize(15);
@@ -92,11 +92,11 @@ function resetSketch() {
 
             fill('blue');
             textSize(15);
-            text('Biologist 1', width / 6, height / 40);
+            text('CapCom Hayden', width / 6, height / 40);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 2', width / 2, height / 40);
+            text('Hello', width / 2, height / 40);
             textAlign(CENTER, CENTER);
 
             textSize(15);

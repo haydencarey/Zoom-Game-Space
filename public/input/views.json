@@ -1,7 +1,7 @@
 [{
         "id": "take-off",
         "stage": "Take Off",
-        "link": "take-off.jpg"
+        "link": "./images/take-off.jpg"
     },
     {
         "id": "launch",
@@ -12,18 +12,27 @@
     {
         "id": "Moon",
         "stage": "Moon Slingshot",
-        "link": "moon-slingshot.jpg"
+        "link": "./images/moon-slingshot.jpg"
+    },
+    {
+        "id": "Space",
+        "stage": "Space",
+        "link": "./images/space.jpg"
     },
     {
         "id": "asteroid",
         "stage": "Asteroid Belt",
-        "link": "asteroid.jpg"
+        "link": "./images/asteroid.jpg"
     },
     {
         "id": "landing",
         "stage": "Landing",
-        "link": "landing.jpg"
+        "link": "./images/landing.jpg"
+    },
+    {
+        "id": "stand-by",
+        "stage": "Please Stand By",
+        "danger": "./images/error.png"
     }
-
 
 ]

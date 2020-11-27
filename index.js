@@ -40,14 +40,76 @@ io.sockets.on('connection', function(socket) {
         io.sockets.emit('msg', data);
 
     });
+
+    //the audio buttons
+
     //listening for audioObh from the client
     socket.on('audioObj', function(data) {
-        console.log("Received a 'audioObj' event");
-        console.log(data);
         //Send audio response to all clients, including this one
         io.sockets.emit('audioObj', data);
 
     })
+
+    //listening for audio4Obh from the client
+    socket.on('audio4Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio4Obj', data);
+
+    })
+    socket.on('audio5Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio5Obj', data);
+
+    })
+    socket.on('audio6Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio6Obj', data);
+    })
+    socket.on('audio7Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio7Obj', data);
+    })
+    socket.on('audio8Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio8Obj', data);
+    })
+    socket.on('audio9Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio9Obj', data);
+    })
+    socket.on('audio10Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio10Obj', data);
+    })
+    socket.on('audio11Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio11Obj', data);
+    })
+    socket.on('audio12Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio12Obj', data);
+    })
+
+    socket.on('audio17Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio17Obj', data);
+    })
+    socket.on('audio18Obj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audio18Obj', data);
+    })
+    socket.on('danger', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('danger', data);
+    })
+
+    socket.on('sleepEmit', function(data) {
+        console.log(data);
+
+        //Send audio response to all clients, including this one
+        io.sockets.emit('sleepEmit', data);
+    })
+
 
     //Listen for a message named 'notesMsg' from this client
     socket.on('notesMsg', function(data) {
@@ -76,15 +138,18 @@ io.sockets.on('connection', function(socket) {
         // check to see if the password equals the authentication password
         if (obj.password === adminPassword) {
             //if these match up, emit obj.count to the clients
-            io.sockets.emit('next_step', obj.count);
+            io.sockets.emit('next_step', obj);
         }
     });
+
     //Listen for a message named 'next_step_view' from this client
     socket.on('next_step_view', function(obj) {
         // check to see if the password equals the authentication password
+        console.log(obj);
         if (obj.password === adminPassword) {
             //if these match up, emit obj.count to the clients
             io.sockets.emit('next_step_view', obj.count);
+            // io.sockets.emit('next_step_view', obj.audio2);
         }
     });
 

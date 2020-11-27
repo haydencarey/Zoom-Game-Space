@@ -2,16 +2,21 @@ var ship;
 var asteroids = [];
 var lasers = [];
 let x;
-let audio3 = new Audio('alien.mp3');
+let audio3 = new Audio('./audio/alien.mp3');
 // const urlParams = new URLSearchParams(window.location.search);
 // const password = urlParams.get('password');
 let asteroidButton;
+
 
 //create socket connection
 //check if other people are there ( i need to get initial number)
 // on connection let other totalplayers=2=0
 //on connection how many sockets are connected
-
+let bgCol;
+let sinVal;
+let sinValRate;
+let index;
+let r;
 
 
 let drawButton;
@@ -26,9 +31,11 @@ function setup() {
         asteroids.push(new Asteroid());
     }
 
+
     drawButton = createButton('click me')
     drawButton.id('asteroid-button');
     drawButton.mouseClicked(function() {
+
 
         //drawThing = true;
         socket.emit('game-started', 'game-id')
@@ -48,25 +55,66 @@ function draw() {
 }
 
 function asteroidGame() {
+
+
     fill('white');
     textSize(32);
     text('Auto Pilot Activated', 150, 200);
     if (drawThing) {
         background(0);
+        textSize(10);
+        text('Use WASD to steer and spacebar to shoot', 200, 400);
+        fill(255);
 
         for (var i = 0; i < asteroids.length; i++) {
             if (ship.hits(asteroids[i])) {
                 console.log('ooops!');
-                // asteroids.push(new Asteroid());
-                // audio3.play();
-
-
-
+                asteroids.push(new Asteroid());
+                audio3.play();
             }
+
+
             asteroids[i].render();
             asteroids[i].update();
             asteroids[i].edges();
         }
+        if (i > 10000) {
+            noLoop();
+            // document.getElementById("sub-container1").innerHTML = "now";
+
+
+        }
+        if (i > 300) {
+
+
+            background(0);
+            i = 0;
+            x = 0;
+            pixelDensity(1);
+
+            sinValRate = frameCount * 15;
+            sinVal = sin(radians(sinValRate));
+            bgCol = map(sinVal, -1, 1, 0, 150);
+
+            loadPixels();
+            for (x = 0; x < width; x++) {
+                for (y = 0; y < height; y++) {
+                    index = (x + y * width) * 4;
+                    r = random(255);
+                    pixels[index + 0] = r;
+                    pixels[index + 1] = r;
+                    pixels[index + 2] = r;
+                    pixels[index + 3] = 255;
+                }
+            }
+            updatePixels();
+
+            background(bgCol);
+
+
+        }
+
+
 
 
 
@@ -97,6 +145,8 @@ function asteroidGame() {
         ship.update();
         ship.edges();
     }
+
+
 
 }
 

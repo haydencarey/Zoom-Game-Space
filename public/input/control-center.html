@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMPANION</title>
+    <title>CONTROL CENTER</title>
     <link href="style2.css" rel="stylesheet" />
 
 
@@ -12,41 +12,48 @@
 </head>
 
 <body>
+    <button id="siren">Sound Alarm</button>
+    <button id="sleep">Hypersleep</button>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" id="closeButton" class="closebtn">&times;</a>
+      </div>
+    <button id="hyperSleep" >Sleep</button>
     <h1>
         <span id="heading-name"></span> Control Center
     </h1>
+   
 
     <div class="frame">
         <div class="left-side">
             <div class="all-buttons">
                 <div class="buttons">
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom1" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom2" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom3" class="button_control" style="background: gold"></button>
                 </div>
 
                 <div class="buttons2">
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom4" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom5" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom6" class="button_control" style="background: gold"></button>
                 </div>
 
                 <div class="buttons3">
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
-                    <button id="buttonRoom" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom7" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom8" class="button_control" style="background: gold"></button>
+                    <button id="buttonRoom9" class="button_control" style="background: gold"></button>
                 </div>
             </div>
             <div class="all-switches">
                 <div class="first-switches">
+                    <label id="checkbox1" class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
                     <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-                    <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label>
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
                 </div>
 
                 <div class="second-switches">
@@ -88,7 +95,7 @@
         <div class="right-side">
             <div class="all-sliders">
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="1000" step="1" class="slider1">
+                    <input id="slider1" type="range" min="1" max="1000" step="1" class="slider1">
                 </div>
                 <div class="slidecontainer">
                     <input type="range" min="1" max="1000" step="1" value="200" class="slider2">
@@ -102,7 +109,7 @@
             </div>
 
             <div class="gif">
-                <img src="shuttle.gif" alt="Space Shuttle" class="shuttle-gif">
+                <img src="./images/shuttle.gif" alt="Space Shuttle" class="shuttle-gif">
             </div>
         </div>
 
@@ -114,6 +121,7 @@
 
             <div class="sub-container1">
                 <!-- <button id="asteroid-button"> Hello</button> -->
+
             </div>
 
 
@@ -136,9 +144,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/addons/p5.dom.min.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.29/lib/p5.serialport.js"></script>
     <script type="text/javascript " src="/socket.io/socket.io.js "></script>
     <script src="appViewsJSON.js"></script>
     <script src="sketch1.js"></script>
+    <!-- <script src="sketch2.js"></script> -->
     <script src="ship.js"></script>
     <script src="asteroid.js"></script>
     <script src="laser.js"></script>

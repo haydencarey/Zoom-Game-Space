@@ -7,36 +7,43 @@
     {
         "id": "stage-2",
         "stage": "Stage 2",
-        "name": "The Spacecraft",
-        "info": "Where you are, turn around and select your spacecraft. Keep the considerations in mind."
+        "name": "Pre-mission Introductions",
+        "info": "Let’s take a moment to introduce ourselves and share a specimen we have been studying in our personal practices"
     },
+
     {
         "id": "stage-3",
         "stage": "Stage 3",
+        "name": "The Spacecraft",
+        "info": "Input your spacecraft into our AI servers by roughly sketching your spacecraft in the Spacecraft Detector at the bottom of the page"
+    },
+    {
+        "id": "stage-4",
+        "stage": "Stage 5",
         "name": "Spacecraft Sketches and it's Capabilities",
         "info": "Sketch your spacecraft in your designated at the bottom of the page. In the intercom, inform the team of it's capabilities"
     },
     {
-        "id": "stage-4",
-        "stage": "Stage 4",
+        "id": "stage-5",
+        "stage": "Stage 5",
         "name": "Spacecraft Feedback",
         "info": "In the intercom, provide feedback on your team's spacecraft selection. What do you think of the team's spacecraft?"
     },
     {
-        "id": "stage-5",
-        "stage": "Stage 5",
+        "id": "stage-6",
+        "stage": "Stage 6",
         "name": "Interplanetary Travel",
-        "info": "Get ready for take-off. Everyone, please settle into your control centers. Make sure your helmet is on and secure. Be prepared for intense G forces and turbulence."
+        "info": "Get ready for take-off. Everyone, please launch your control centers through the link at the top of the screen."
     },
     {
-        "id": "stage-6",
+        "id": "stage-7",
         "stage": "",
         "name": "",
         "info": "Interplanetary Travel in Progress"
     },
     {
-        "id": "stage-6",
-        "stage": "Stage 6",
+        "id": "stage-8",
+        "stage": "Stage 8",
         "name": "Planet Utu",
         "info": "Search Planet Utu for a life form. Once you find something, record your notes in the Life Observations Box below"
     }
