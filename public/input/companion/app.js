@@ -5,18 +5,18 @@ window.addEventListener('load', function() {
     let urlParams = new URLSearchParams(window.location.search);
     let password = urlParams.get('password');
     let nextStepBtn = document.getElementById('mission-button');
-    let launchBtn = document.getElementById('go-audio');
-    let audio17 = new Audio('./audio/apollo.mp3');
+  
+    const toggleButton = document.getElementById('toggle');
+    let resetButton = document.getElementById('reset');
+    
+    toggleButton.style.display = 'none';
+    resetButton.style.display = 'none';
     // nextStepBtn.style.display = 'none';
     // var socketId = null;
 
     //Open and connect socket
     let socket = io();
-    socket.on('audio17Obj', function(data) {
-            if (data) {
-                audio17.play();
-            }
-        })
+
         //Listen for confirmation of connection
     socket.on('connect', function() {
 
@@ -30,7 +30,9 @@ window.addEventListener('load', function() {
         //if true and the user is the "host", display the button, otherwise don't
         if (data === true) {
             nextStepBtn.style.display = 'inline-block';
-            launchBtn.style.display = 'inline-block';
+           
+            toggleButton.style.display = 'inline-block';
+            resetButton.style.display = 'inline-block';
         }
     });
 
@@ -55,6 +57,32 @@ window.addEventListener('load', function() {
         chatBox.scrollTop = chatBox.scrollHeight;
     });
 
+   
+    let started = false;
+    toggleButton.addEventListener('click', function() {
+        if (!started) {
+            socket.emit('startTimer');
+            toggleButton.innerText = "Stop";
+            started = true;
+        } else {
+            socket.emit('stopTimer');
+            started = false;
+            toggleButton.innerText = "Start";
+        }
+    });
+
+    resetButton.addEventListener('click', function() {
+        socket.emit('resetTimer');
+    });
+
+    socket.on('timeEvent', function(time) {
+        if (started) {
+            toggleButton.innerText = "Stop";
+        }
+        var timer = document.getElementById('timer');
+        timer.innerText = time;
+    });
+
     /* --- Code to SEND a socket message to the Server ---  */
     // let nameInput = document.getElementById('name-input')
     let msgInput = document.getElementById('msg-input');
@@ -74,17 +102,5 @@ window.addEventListener('load', function() {
     });
 
 
-    launchBtn.addEventListener('click', function() {
-        audio17.play();
-
-        let audio17Obj = {
-            "audio10": audio17
-        }
-        socket.emit('audio17Obj', audio17Obj);
-    })
-
-
-
-
-
+   
 })

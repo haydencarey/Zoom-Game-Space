@@ -6,6 +6,7 @@ let audio3 = new Audio('./audio/alien.mp3');
 // const urlParams = new URLSearchParams(window.location.search);
 // const password = urlParams.get('password');
 let asteroidButton;
+let audio19 = new Audio('./audio/danger.mp3');
 
 
 //create socket connection
@@ -26,7 +27,7 @@ function setup() {
     createCanvas(580, 403);
 
     ship = new Ship();
-    x = 5;
+    x = 3;
     for (var i = 0; i < x; i++) {
         asteroids.push(new Asteroid());
     }
@@ -70,7 +71,8 @@ function asteroidGame() {
             if (ship.hits(asteroids[i])) {
                 console.log('ooops!');
                 asteroids.push(new Asteroid());
-                audio3.play();
+              
+                
             }
 
 
@@ -79,13 +81,15 @@ function asteroidGame() {
             asteroids[i].edges();
         }
         if (i > 10000) {
+          
             noLoop();
             // document.getElementById("sub-container1").innerHTML = "now";
 
 
         }
-        if (i > 300) {
-
+        if (i > 400) {
+            // audio3.play();
+            audio19.play();
 
             background(0);
             i = 0;

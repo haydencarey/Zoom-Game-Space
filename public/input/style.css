@@ -3,6 +3,7 @@
             font-family: Space Mono;
             color: whitesmoke;
         }
+       
         
         h1 {
             font-family: Space Age;
@@ -173,3 +174,33 @@
             text-align: center;
             margin-top: 10px;
         }
+
+  
+  #timer {
+    font-size: 45px;
+    font-family: Space Mono;
+  }
+  .timer-buttons{
+margin-top: -20px;
+  }
+
+.timer-div{
+text-align: center;
+}
+
+.logo{
+    max-width: 15%;
+    margin-left: 28%;
+    height: auto;
+    flex: 1;
+}
+.right-wrapper{
+    flex: 2;
+    margin-top: 3%;
+    margin-right: 5%;
+}
+  .wrapper{
+      margin-top: -3%;
+      display: flex;
+      margin-left: -191px;
+  }

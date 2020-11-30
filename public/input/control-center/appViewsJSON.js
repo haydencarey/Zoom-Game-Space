@@ -11,12 +11,14 @@ let alarmButton = document.getElementById('siren');
 let sleepButton = document.getElementById('sleep');
 let hyperSleepBtn = document.getElementById('hyperSleep');
 let closeButton = document.getElementById('closeButton');
+let launchBtn = document.getElementById('go-audio');
+let audio17 = new Audio('./audio/apollo.mp3');
 let audio18 = new Audio('./audio/alarm.mp3');
 alarmButton.style.display = 'none';
 sleepButton.style.display = 'none';
 closeButton.style.display = 'none';
 hyperSleepBtn.style.display = 'none';
-let audio19 = new Audio('./audio/danger.mp3');
+
 
 let socket = io();
 
@@ -43,7 +45,7 @@ socket.on('next_step_view', function(cnt) {
 });
 
 socket.on('danger', function() {
-    audio19.play();
+    audio3.play();
 })
 
 //if true and the user is the "host", display the button, otherwise, don't.
@@ -54,6 +56,7 @@ socket.on('authentication', function(data) {
         sleepButton.style.display = 'inline-block';
         hyperSleepBtn.style.display = 'inline-block';
         closeButton.style.display = 'inline-block';
+        launchBtn.style.display = 'inline-block';
     }
 });
 
@@ -71,7 +74,7 @@ function renderImage(views, count) {
         missionBox.innerHTML = `  <img class="my-img" src=${ views[count].danger}>`
             // audio19.play();
         socket.emit('danger', {
-            audio19
+            audio3
         });
     } else {
         missionBox.innerHTML = `<img class="my-img" src=${ views[count].link}> `
@@ -149,30 +152,39 @@ window.addEventListener('load', function() {
 
     //need help with this
 
-    socket.on('audio18Obj', function(data) {
+    socket.on('sleepEmit', function(data) {
         if (data) {
-            hyperSleepBtn.addEventListener('click', function(){
-                document.getElementById("myNav").style.width = "100%";
-            })
-            closeButton.addEventListener('click', function(){
-                document.getElementById("myNav").style.width = "0%";
-            })
+            document.getElementById("myNav").style.width = data.isSleeping ? "100%" : "0%";
+        }
+    });
+
+    socket.on('audio17Obj', function(data) {
+        if (data) {
+            audio17.play();
         }
     })
-   
+
+    launchBtn.addEventListener('click', function() {
+        audio17.play();
+
+        let audio17Obj = {
+            "audio10": audio17
+        }
+        socket.emit('audio17Obj', audio17Obj);
+    });
+
     hyperSleepBtn.addEventListener('click', function(){
         document.getElementById("myNav").style.width = "100%";
-    })
+        socket.emit('sleepEmit', {
+            isSleeping: true
+        });
+    });
 
     closeButton.addEventListener('click', function(){
         document.getElementById("myNav").style.width = "0%";
-    })
-
-    let sleepObj = {
-        "sleepOn": "100%",
-        "sleepOff": "0%"
-    }
-    socket.emit('sleepEmit', sleepObj);
-
+        socket.emit('sleepEmit', {
+            isSleeping: false
+        });
+    });
 })
 

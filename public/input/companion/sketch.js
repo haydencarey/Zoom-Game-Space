@@ -17,35 +17,35 @@ function setup() {
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 2', width / 2, height / 40);
+            text('Julia', width / 2, height / 40);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 3', width / 1.2, height / 40);
+            text('Evan', width / 1.2, height / 40);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 4', width / 6, height / 2.8);
+            text('Mom', width / 6, height / 2.8);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 5', width / 2, height / 2.8);
+            text('Anna', width / 2, height / 2.8);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 6', width / 1.2, height / 2.8);
+            text('Dad', width / 1.2, height / 2.8);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 7', width / 6, height / 1.45);
+            text('Ethan', width / 6, height / 1.45);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 8', width / 2, height / 1.45);
+            text('Sarah', width / 2, height / 1.45);
             textAlign(CENTER, CENTER);
 
             textSize(15);
-            text('Biologist 9', width / 1.2, height / 1.45);
+            text('Dean', width / 1.2, height / 1.45);
             textAlign(CENTER, CENTER);
 
             fill(255);

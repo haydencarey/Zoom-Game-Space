@@ -11,15 +11,32 @@
 </head>
 
 <body>
+   
     <h1>
         <span id="heading-name">Your </span> Mission Companion
     </h1>
-    <button id="go-audio" style="display: none;">Go for Launch</button>
-    <p>
-        <p class="click-here">Click <a target="_blank" href="control-center.html">here</a> for<span id="control-center-name"></span> Inter Planetary Travel Control Center
-        </p>
-        </div>
-    </p>
+<div class="wrapper">
+    
+    <img class="logo" src="./images/Xotera.png" alt="Xotera logo">
+    
+    <div class="right-wrapper">
+
+        <p>
+         <p class="click-here">Click <a target="_blank" href="control-center.html">here</a> for<span id="control-center-name"></span> Inter Planetary Travel Control Center
+         </p>
+            
+     </p>
+   
+     <div class="timer-div">
+        <h2 id="timer">00 : 00 . 000</h2>
+            <div class="timer-buttons">
+                <button id="toggle">Start</button>
+                <button id="reset">Reset</button>
+            </div>
+    </div>
+    </div>
+</div>
+
     <div class="container">
         <!-- View chat messages here here -->
         <div class="sub-container mission-feed">
@@ -75,10 +92,8 @@
 
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
-    <script src="sketch.js"></script>
-    <script src="appPromptsJSON.js"></script>
-    <script src="appShare.js"></script>
-
-
+    <script src="./companion/app.js"></script>
+    <script src="./companion/sketch.js"></script>
+    <script src="./companion/appPromptsJSON.js"></script>
+    <script src="./companion/appShare.js"></script>
 </html>

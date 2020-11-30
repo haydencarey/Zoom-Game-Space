@@ -14,17 +14,20 @@
 <body>
     <button id="siren">Sound Alarm</button>
     <button id="sleep">Hypersleep</button>
+    <button id="go-audio" style="display: none;">Go for Launch</button>
     <div id="myNav" class="overlay">
         <a href="javascript:void(0)" id="closeButton" class="closebtn">&times;</a>
       </div>
     <button id="hyperSleep" >Sleep</button>
+    
     <h1>
-        <span id="heading-name"></span> Control Center
+       <span id="heading-name" class="heading-name"></span> Control Center
     </h1>
    
-
+   
     <div class="frame">
         <div class="left-side">
+           
             <div class="all-buttons">
                 <div class="buttons">
                     <button id="buttonRoom1" class="button_control" style="background: gold"></button>
@@ -146,13 +149,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/addons/p5.dom.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.29/lib/p5.serialport.js"></script>
     <script type="text/javascript " src="/socket.io/socket.io.js "></script>
-    <script src="appViewsJSON.js"></script>
-    <script src="sketch1.js"></script>
+    <script src="./control-center/appViewsJSON.js"></script>
+    <script src="./control-center/sketch1.js"></script>
     <!-- <script src="sketch2.js"></script> -->
-    <script src="ship.js"></script>
-    <script src="asteroid.js"></script>
-    <script src="laser.js"></script>
-    <script src="appButtons.js"></script>
+    <script src="./control-center/ship.js"></script>
+    <script src="./control-center/asteroid.js"></script>
+    <script src="./control-center/laser.js"></script>
+    <script src="./control-center/appButtons.js"></script>
 
     <!-- <script src="appShare.js"></script> -->
 

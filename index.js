@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 app.use('/', express.static('public'));
+let Stopwatch = require('./timer.js');
 
 //Initialize the actual HTTP server
 let http = require('http');
@@ -19,7 +20,7 @@ let io = require('socket.io').listen(server);
 //Listen for individual clients/users to connect
 io.sockets.on('connection', function(socket) {
     console.log("We have a new client: " + socket.id);
-
+    let watch = new Stopwatch(io);
 
     //Listen for password authentication from the client
     socket.on('authentication', function(obj) {
@@ -164,6 +165,21 @@ io.sockets.on('connection', function(socket) {
 
         io.emit('buttonPressed', { id: 23 });
     })
+
+    socket.on('startTimer', function() {
+        console.log("Start Timer");
+        watch.start();
+    });
+
+    socket.on('stopTimer', function() {
+        console.log("Stop Timer");
+        watch.stop();
+    });
+
+    socket.on('resetTimer', function() {
+        console.log("Reset Timer");
+        watch.reset();
+    });
 
     //Listen for this client to disconnect
     socket.on('disconnect', function() {
