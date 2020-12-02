@@ -99,6 +99,11 @@ io.sockets.on('connection', function(socket) {
         //Send audio response to all clients, including this one
         io.sockets.emit('audio18Obj', data);
     })
+    socket.on('audioSObj', function(data) {
+        //Send audio response to all clients, including this one
+        io.sockets.emit('audioSObj', data);
+    })
+
     socket.on('danger', function(data) {
         //Send audio response to all clients, including this one
         io.sockets.emit('danger', data);

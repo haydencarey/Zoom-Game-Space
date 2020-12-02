@@ -21,13 +21,13 @@
         "id": "stage-4",
         "stage": "Stage 5",
         "name": "Spacecraft Sketches and it's Capabilities",
-        "info": "Sketch your spacecraft in your designated at the bottom of the page. In the intercom, inform the team of it's capabilities"
+        "info": "Sketch your spacecraft in your designated at the bottom of the page. Inform the team of it's capabilities!"
     },
     {
         "id": "stage-5",
         "stage": "Stage 5",
         "name": "Spacecraft Feedback",
-        "info": "In the intercom, provide feedback on your team's spacecraft selection. What do you think of the team's spacecraft?"
+        "info": "In the intercom, provide feedback and react to your team's spacecraft selection. What do you think of their spacecraft?"
     },
     {
         "id": "stage-6",

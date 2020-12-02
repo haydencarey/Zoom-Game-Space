@@ -12,6 +12,7 @@ let audio13 = new Audio('./audio/bowie.mp3');
 let audio14 = new Audio('./audio/cudi.mp3');
 let audio15 = new Audio('./audio/070.mp3');
 let audio16 = new Audio('./audio/beach.mp3');
+let audioS = new Audio('./audio/seperation.mp3');
 let i;
 let txt;
 let speed;
@@ -38,7 +39,13 @@ window.addEventListener('load', function() {
         }
     })
 
-    // listen for audio4Obj from the client
+    socket.on('audioSObj', function(data) {
+        if (data) {
+            audioS.play();
+        }
+    })
+
+   
     socket.on('audio4Obj', function(data) {
             if (data) {
                 audio4.play();
@@ -100,6 +107,22 @@ window.addEventListener('load', function() {
         //send audioObj to the server
         socket.emit('audioObj', audioObj);
     })
+
+    let seperationButton = document.getElementById("seperation-button")
+    seperationButton.addEventListener('click', function() {
+        audioS.play();
+
+        // audio = audio.play();
+
+        let audioSObj = {
+            "audioS": audioS
+        }
+
+        //send audioObj to the server
+        socket.emit('audioSObj', audioSObj);
+    })
+
+
 
     let audioButton1 = document.getElementById("buttonRoom1")
     buttonRoom1.addEventListener('click', function() {

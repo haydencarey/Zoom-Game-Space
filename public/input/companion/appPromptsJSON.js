@@ -16,7 +16,7 @@ function nextStep(prompts, count) {
 
 window.addEventListener('load', function() {
     //fetch data set
-    fetch("prompts.json")
+    fetch("./json/prompts.json")
         .then(response => response.json())
         .then(data => {
             console.log(data);

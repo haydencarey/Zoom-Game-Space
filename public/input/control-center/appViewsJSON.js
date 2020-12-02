@@ -86,7 +86,7 @@ function renderImage(views, count) {
 
 window.addEventListener('load', function() {
     //fetch data set
-    fetch("views.json")
+    fetch("./json/views.json")
         .then(response => response.json())
         .then(data => {
             console.log(data);
