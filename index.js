@@ -1,5 +1,7 @@
 let express = require('express');
 let app = express();
+let fs = require("fs");
+
 app.use('/', express.static('public'));
 let Stopwatch = require('./timer.js');
 

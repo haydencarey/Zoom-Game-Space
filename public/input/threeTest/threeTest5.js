@@ -33,18 +33,18 @@ import * as THREE from 'https://unpkg.com/three@0.117.0/build/three.module.js';
 
 				// world
 
-				const s = 250;
+				const s = 5;
 
-				const geometry = new THREE.BoxBufferGeometry( s, s, s );
+				const geometry = new THREE.SphereBufferGeometry(5, 100, 50);
 				const material = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0xffffff, shininess: 50 } );
 
 				for ( let i = 0; i < 3000; i ++ ) {
 
 					const mesh = new THREE.Mesh( geometry, material );
 
-					mesh.position.x = 8000 * ( 2.0 * Math.random() - 1.0 );
-					mesh.position.y = 8000 * ( 2.0 * Math.random() - 1.0 );
-					mesh.position.z = 8000 * ( 2.0 * Math.random() - 1.0 );
+					mesh.position.x = 8000 * ( 1.0 * Math.random() - 1.0 );
+					mesh.position.y = 8000 * ( 1.0 * Math.random() - 1.0 );
+					mesh.position.z = 8000 * ( 1.0 * Math.random() - 1.0 );
 
 					mesh.rotation.x = Math.random() * Math.PI;
 					mesh.rotation.y = Math.random() * Math.PI;
@@ -60,7 +60,7 @@ import * as THREE from 'https://unpkg.com/three@0.117.0/build/three.module.js';
 
 				// lights
 
-				const dirLight = new THREE.DirectionalLight( 0xffffff, 0.05 );
+				const dirLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
 				dirLight.position.set( 0, - 1, 0 ).normalize();
 				dirLight.color.setHSL( 0.1, 0.7, 0.5 );
 				scene.add( dirLight );
@@ -104,7 +104,7 @@ import * as THREE from 'https://unpkg.com/three@0.117.0/build/three.module.js';
 
 				controls = new FlyControls( camera, renderer.domElement );
 
-				controls.movementSpeed = 2500;
+				controls.movementSpeed = 1500;
 				controls.domElement = container;
 				controls.rollSpeed = Math.PI / 6;
 				controls.autoForward = false;

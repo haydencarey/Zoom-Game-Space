@@ -3,6 +3,14 @@
             font-family: Space Mono;
             color: whitesmoke;
         }
+
+        .camera-box{
+            border: 7px solid whitesmoke;
+            display: flex;
+            height: 500px;
+            padding-left: 3px;
+            overflow: auto;
+        }
         
         h1 {
             font-family: Space Age;
@@ -28,7 +36,7 @@
             display: flex;
             justify-content: 'center';
             width: 100%;
-            margin: 20px 0;
+            margin: 120px 0;
         }
         
         .container {

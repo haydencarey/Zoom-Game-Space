@@ -2,4 +2,26 @@ body {
     background-color: #191970;
     font-family: Space Mono;
     color: whitesmoke;
+    text-align: center;
+}
+
+.windows{
+    position: relative;
+    margin: 0 auto;
+    line-height: 50px;
+    height: 50px;
+    display: flex;
+    /* margin-top: %; */
+}
+
+.windows .circle {
+    height: 500px;
+    width: 500px;
+    /* background-color: blue; */
+    border: 3px solid whitesmoke;
+    border-radius: 50%;
+    border-color: white;
+    text-align: center;
+    /* display: inline-block; */
+    margin: 0 auto;
 }
