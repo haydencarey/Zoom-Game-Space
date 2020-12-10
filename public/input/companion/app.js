@@ -1,4 +1,5 @@
 window.addEventListener('load', function() {
+    //Open and connect socket
 
 
     //create url paramter
@@ -14,7 +15,6 @@ window.addEventListener('load', function() {
     // nextStepBtn.style.display = 'none';
     // var socketId = null;
 
-    //Open and connect socket
     let socket = io();
 
         //Listen for confirmation of connection

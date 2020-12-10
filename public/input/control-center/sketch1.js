@@ -63,8 +63,8 @@ function asteroidGame() {
     text('Auto Pilot Activated', 150, 200);
     if (drawThing) {
         background(0);
-        textSize(10);
-        text('Use WASD to steer and spacebar to shoot', 200, 400);
+        textSize(20);
+        text('Quick, use WASD to steer and SPACEBAR to fire!', 80, 400);
         fill(255);
 
         for (var i = 0; i < asteroids.length; i++) {
@@ -89,7 +89,7 @@ function asteroidGame() {
         }
         if (i > 400) {
             // audio3.play();
-            audio19.play();
+            audio3.play();
 
             background(0);
             i = 0;

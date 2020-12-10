@@ -12,18 +12,27 @@
     {
         "id": "Moon",
         "stage": "Moon Slingshot",
-        "link": "./images/moon-slingshot.jpg"
+        
+        "isSpace": true
     },
     {
-        "id": "Space",
-        "stage": "Space",
-        "link": "./images/earth.jpg"
+        "id": "Hypersleep",
+        "stage": "",
+        "hypersleep": true
     },
     {
         "id": "asteroid",
         "stage": "Asteroid Belt",
         "link": "./images/asteroid.jpg"
     },
+    
+    {
+        "id": "woromhole",
+        "stage": "Hyperspeed",
+        "link": "./images/asteroid.jpg",
+        "wormhole": true
+    },
+
     {
         "id": "landing",
         "stage": "Landing",
@@ -33,6 +42,11 @@
         "id": "stand-by",
         "stage": "Please Stand By",
         "danger": "./images/error.png"
+    },
+    {
+        "id": "Utu",
+        "stage": "Utu",
+        "Utu": true
     }
 
 ]

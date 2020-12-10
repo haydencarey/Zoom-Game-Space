@@ -10,6 +10,7 @@ let audio2 = new Audio('./audio/falcon.mp3');
 let alarmButton = document.getElementById('siren');
 let sleepButton = document.getElementById('sleep');
 let hyperSleepBtn = document.getElementById('hyperSleep');
+
 let closeButton = document.getElementById('closeButton');
 let launchBtn = document.getElementById('go-audio');
 let audio17 = new Audio('./audio/apollo.mp3');
@@ -18,6 +19,8 @@ alarmButton.style.display = 'none';
 sleepButton.style.display = 'none';
 closeButton.style.display = 'none';
 hyperSleepBtn.style.display = 'none';
+
+
 
 
 let socket = io();
@@ -57,6 +60,8 @@ socket.on('authentication', function(data) {
         hyperSleepBtn.style.display = 'inline-block';
         closeButton.style.display = 'inline-block';
         launchBtn.style.display = 'inline-block';
+       
+      
     }
 });
 
@@ -69,8 +74,26 @@ function renderImage(views, count) {
     if (views[count].video) {
         missionBox.innerHTML = `  <iframe class="video" width="420" height="315" src=${views[count].video}> </iframe>`
         audio2.play();
+    }
+     else if (views[count].isSpace) {
+         const spaceFrame = document.createElement('iframe');
+        //  const frameDoc = spaceFrame.contentDocument;
+        //  const script = document.createElement('script');
+        //  script.type = 'text/javascript';
+        //  script.src = './threeTest/space.js';
+        //  frameDoc.body.append(script);
+         missionBox.innerHTML = '<iframe class="space-frame" src="/input/space.html" scrolling="no"></iframe>';
+         audio2.pause();
+     
+    }else if(views[count].hypersleep){
+        missionBox.style.backgroundColor = "black";
 
-    } else if (views[count].danger) {
+    } else if(views[count].wormhole){
+        missionBox.innerHTML = '<iframe class="space-frame" src="/input/wormhole-extreme/index.html" scrolling="no"></iframe>';
+    } else if(views[count].Utu){
+        missionBox.innerHTML = '<iframe class="space-frame" src="/input/SpacecraftTest/index.html" scrolling="no"></iframe>';
+    }
+        else if (views[count].danger) {
         missionBox.innerHTML = `  <img class="my-img" src=${ views[count].danger}>`
             // audio19.play();
         socket.emit('danger', {
@@ -186,5 +209,8 @@ window.addEventListener('load', function() {
             isSleeping: false
         });
     });
+
+
+
 })
 

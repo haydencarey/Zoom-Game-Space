@@ -1,8 +1,10 @@
 let namePrompt;
 
 window.addEventListener('load', function() {
+
     //alert name box
     myFunction()
+
 
     console.log(namePrompt)
 
