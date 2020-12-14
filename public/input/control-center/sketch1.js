@@ -161,7 +161,7 @@ function asteroidGame() {
 
 // }
 
-function keyReleased() {
+function keyreleased() {
     ship.setRotation(0);
     ship.boosting(false);
 }

@@ -6,13 +6,15 @@ window.addEventListener('load', function() {
     myFunction()
 
 
-    console.log(namePrompt)
+    // console.log(namePrompt)
 
     if (namePrompt) {
         header = document.getElementById("heading-name");
         header.innerHTML = namePrompt + "'s" + "&nbsp";
         controlName = document.getElementById("control-center-name")
         controlName.innerHTML = "&nbsp" + namePrompt + "'s";
+        detector = document.getElementById("detector");
+        detector.innerHTML = namePrompt + "'s" + "&nbsp";
     }
 
     //initialize socket
@@ -39,6 +41,8 @@ window.addEventListener('load', function() {
         notesBox.scrollTop = notesBox.scrollHeight;
     });
 
+
+    socket.emit('name', namePrompt);
 
     //reference to the Notes Box, Button and Input
 
@@ -68,4 +72,10 @@ window.addEventListener('load', function() {
 //alert box
 function myFunction() {
     namePrompt = window.prompt('Astrobiologist Name');
+    if(namePrompt){
+        localStorage.setItem('name', namePrompt);
+    }
+    
+
+
 }

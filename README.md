@@ -2,7 +2,7 @@
 
 ## Introudction 
 
-For project 2, I was immediately drawn to the concept of creating synergy between Connections Lab and Critical Experiences. I will briefly describe my intentions for my Critical Experiences Project.
+For project 2 and 3, I was immediately drawn to the concept of creating synergy between Connections Lab and Critical Experiences. I will briefly describe my intentions for my Critical Experiences Project.
 
 I am exploring how play in early child development manifests as individuals grow old. My background and passion fall under in-person, imaginative experiences that connect others and that can't be truly experienced unless you are in the presence of the *thing.* I wanted to connect the concept of play with an embodied experience. COVID makes this challenging. I decided to pursue the next best option in this new world, a Zoom experience, which has been [gaining traction as of late](https://www.nytimes.com/2020/11/05/theater/escape-rooms-online-play.html). 
 

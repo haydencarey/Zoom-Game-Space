@@ -34,9 +34,20 @@
         }
         
         #defaultCanvas0 {
-            width: 51%;
+            display: flex;
+            border: 5px solid whitesmoke;
+            width: 50%;
             height: 548px;
             margin-top: 10px;
+            
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1%;
+        }
+
+        #click-me{
+            margin-left: 48%;
+            margin-bottom: 5%;
         }
         
         .chat-input {
@@ -170,7 +181,7 @@
             margin-top: 27px;
         }
         
-        #detector {
+        h2 {
             text-align: center;
             margin-top: 10px;
         }

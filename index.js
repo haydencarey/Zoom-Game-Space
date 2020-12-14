@@ -1,9 +1,10 @@
 let express = require('express');
 let app = express();
 let fs = require("fs");
+const Datastore = require('nedb');
 
 app.use('/', express.static('public'));
-let Stopwatch = require('./timer.js');
+let Stopwatch = require('./public/input/companion/timer.js');
 
 //Initialize the actual HTTP server
 let http = require('http');
@@ -12,6 +13,12 @@ let port = process.env.PORT || 3000;
 server.listen(port, () => {
     console.log("Server listening at port: " + port);
 });
+
+//db initial code
+const database = new Datastore('p5.db');
+database.loadDatabase();
+
+
 
 //set the host password
 let adminPassword = '1234';
@@ -43,7 +50,17 @@ io.sockets.on('connection', function(socket) {
         io.sockets.emit('msg', data);
 
     });
+     //Listen for a message named 'msg' from this client
+     socket.on('name', function(data) {
+        //Data can be numbers, strings, objects
+        console.log("Received a 'msg' event");
+        console.log(data);
+    
 
+
+        //Send a response to all clients, including this one
+        io.sockets.emit('name', data);
+     });
     //the audio buttons
 
     //listening for audioObh from the client
@@ -134,12 +151,19 @@ io.sockets.on('connection', function(socket) {
     //Listen for a message named 'data' from this client
     socket.on('data', function(data) {
         //Data can be numbers, strings, objects
-        console.log("Received: 'data' " + data);
+        let dataString = JSON.stringify(data) 
+        console.log("Received: 'data' " + dataString );
+
+        //insert p5 sketch into database
+        database.insert(dataString, (err, newDocs)=>{
+            console.log("new document inserted")
+        })
 
         //Send the data to all clients, including this one
         //Set the name of the message to be 'data'
         io.sockets.emit('data', data);
     });
+    
 
     //Listen for a message named 'next_step' from this client
     socket.on('next_step', function(obj) {

@@ -1,148 +1,132 @@
-function setup() {
+let c = "black";
+let mousePos ;
 
+function setup() {
+// console.log(namePrompt);
     console.log("setup")
-    createCanvas(window.innerWidth * .90, window.innerHeight);
-    document.getElementById("defaultCanvas0").style.width = "90%";
+    createCanvas(window.innerWidth * .50, window.innerHeight * .50 );
+    // document.getElementById("defaultCanvas0").style.width = "75%";
+    //Get the saved name
+    // let name = localStorage.getItem('name');
     // let button = createButton("Reset");
     // button.mousePressed(resetSketch);
+
+    let x = document.createElement("Button");
+    x.setAttribute("id", "click-me");
+    let t = document.createTextNode("click me");
+    x.appendChild(t);
+    document.body.appendChild(x);
+
     background(200);
-    let w = width / 3,
-        h = height / 3;
-    for (let x = 0; x < 20; x++) {
-        for (let y = 0; y < 20; y++) {
+  
+    // for (let x = 0; x < 20; x++) {
+    //     for (let y = 0; y < 20; y++) {
 
-            fill('black');
-            textSize(15);
-            text('CapCom Hayden', width / 6, height / 40);
-            textAlign(CENTER, CENTER);
+            // fill('black');
+            // textSize(30);
+            // text(name, width / 2, height / 20);
+            // textAlign(CENTER, CENTER);
 
-            textSize(15);
-            text('Julia', width / 2, height / 40);
-            textAlign(CENTER, CENTER);
+            // textSize(15);
+            // text('Julia', width / 2, height / 40);
+            // textAlign(CENTER, CENTER);
 
-            textSize(15);
-            text('Evan', width / 1.2, height / 40);
-            textAlign(CENTER, CENTER);
 
-            textSize(15);
-            text('Mom', width / 6, height / 2.8);
-            textAlign(CENTER, CENTER);
+        
+        // }
 
-            textSize(15);
-            text('Anna', width / 2, height / 2.8);
-            textAlign(CENTER, CENTER);
 
-            textSize(15);
-            text('Dad', width / 1.2, height / 2.8);
-            textAlign(CENTER, CENTER);
+        background(255);
+  	noStroke();
+  //draw the first button
+  fill("#ba1e68");
+  rect(0, 0, 40, 40);
 
-            textSize(15);
-            text('Ethan', width / 6, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Sarah', width / 2, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Dean', width / 1.2, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            fill(255);
-            rect(x * w, y * h, w, h);
-        }
+  //draw the second button
+  fill("#191970");
+  rect(40, 0, 40, 40);
+  //draw the third button
+  fill("#145051");
+  rect(80, 0, 40, 40);
+  print(mouseX, mouseY);
+  
+   //draw the fourth button
+  fill("#7649fe");
+  rect(120, 0, 40, 40);
+  print(mouseX, mouseY);
+  //draw the fifth button
 
     }
-
-    //listen for messages named 'data' from the server
+//listen for the message named "data" from the server
     socket.on('data', function(mousePos) {
         console.log(mousePos);
-        noStroke();
-        fill(0);
-        ellipse(mousePos.x, mousePos.y, 5, 5);
+        strokeWeight(5);
+            stroke(mousePos['stroke']);
+            
+        line(mousePos.x, mousePos.y,  mousePos.xPos,  mousePos.yPos);
     })
-}
 
-function mouseDragged() {
-    console.log('sending' + mouseX + ',' + mouseY)
+    //listen for messages named 'data' from the server
+    // socket.on('data', function(mousePos) {
+    //     console.log(mousePos);
+    //     noStroke();
+    //     fill(0);
+    //     ellipse(mousePos.x, mousePos.y, 5, 5);
+    // })
+// }
+
+function mouseDragged(){
+    
+   
+    if (mouseIsPressed) {
+        strokeWeight(5);
+            stroke(c);
+            
+        line(mouseX, mouseY, pmouseX, pmouseY);
+
+        console.log('sending' + mouseX + ',' + mouseY)
         // grab the mouse position
     let mousePos = {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        strokeWeight: 1,
+        stroke: c,
+        xPos: pmouseX,
+        yPos: pmouseY
     }
-    noStroke();
-    fill(0);
-    ellipse(mouseX, mouseY, 5, 5);
+    // var socket = io.connect('http://localhost');
+    
+        
+     socket.emit('data', mousePos)
+      }
+    
+       
+    
+}
 
+function mousePressed() {
+  
+    if (mouseX > 0 && mouseX < 40 && mouseY > 0 && mouseY < 40) {
+        //set the variables to random values
+        c = "#ba1e68";
+      }
+      if (mouseX > 40 && mouseX < 80 && mouseY > 0 && mouseY < 40) {
+        //set the variables to random values
+        c = "#191970";
+      }
+      if (mouseX > 80 && mouseX < 120 && mouseY > 0 && mouseY < 40) {
+        //set the variables to random values
+        c = "#145051";
+      }
+       if (mouseX > 120 && mouseX < 160 && mouseY > 0 && mouseY < 40) {
+        //set the variables to random values
+        c = "#7649fe";
+      }
     socket.emit('data', mousePos)
 
 }
 
-function resetSketch() {
 
-    console.log("setup")
-    createCanvas(window.innerWidth, window.innerHeight);
-    // let button = createButton("Reset");
-    // button.mousePressed(resetSketch);
-    background(200);
-    let w = width / 3,
-        h = height / 3;
-    for (let x = 0; x < 20; x++) {
-        for (let y = 0; y < 20; y++) {
+// function draw() {
 
-            fill('blue');
-            textSize(15);
-            text('CapCom Hayden', width / 6, height / 40);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Hello', width / 2, height / 40);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 3', width / 1.2, height / 40);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 4', width / 6, height / 2.8);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 5', width / 2, height / 2.8);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 6', width / 1.2, height / 2.8);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 7', width / 6, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 8', width / 2, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            textSize(15);
-            text('Biologist 9', width / 1.2, height / 1.45);
-            textAlign(CENTER, CENTER);
-
-            fill(255);
-            stroke(0);
-            rect(x * w, y * h, w, h);
-        }
-
-    }
-
-    //listen for messages named 'data' from the server
-    socket.on('data', function(mousePos) {
-        console.log(mousePos);
-        noStroke();
-        fill(0);
-        ellipse(mousePos.x, mousePos.y, 5, 5);
-    })
-}
-
-function draw() {
-
-}
+// }

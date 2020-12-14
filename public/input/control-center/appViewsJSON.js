@@ -89,7 +89,7 @@ function renderImage(views, count) {
         missionBox.style.backgroundColor = "black";
 
     } else if(views[count].wormhole){
-        missionBox.innerHTML = '<iframe class="space-frame" src="/input/wormhole-extreme/index.html" scrolling="no"></iframe>';
+        missionBox.innerHTML = '<iframe class="space-frame" src="/input/wormhole-extreme/wormhole.html" scrolling="no"></iframe>';
     } else if(views[count].Utu){
         missionBox.innerHTML = '<iframe class="space-frame" src="/input/SpacecraftTest/index.html" scrolling="no"></iframe>';
     }
