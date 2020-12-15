@@ -2,252 +2,323 @@ import * as THREE from 'https://unpkg.com/three@0.117.0/build/three.module.js';
 
 import Stats from 'https://unpkg.com/three@0.117.0/examples/jsm/libs/stats.module.js';
 
-			import { FlyControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/controls/FlyControls.js';
-			import { EffectComposer } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/EffectComposer.js';
-			import { RenderPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/RenderPass.js';
-			import { FilmPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/FilmPass.js';
+import { FlyControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/controls/FlyControls.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/controls/OrbitControls.js';
+import { EffectComposer } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/RenderPass.js';
+import { FilmPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/FilmPass.js';
 
-			const radius = 6571;
-			const tilt = 0.41;
-			const rotationSpeed = 0.02;
+const radius = 6571;
+const tilt = 0.41;
+const rotationSpeed = 0.02;
+const cloudsScale = 1.005;
+const moonScale = 0.23;
 
-			const cloudsScale = 1.005;
-			const moonScale = 0.23;
 
-			const MARGIN = 0;
-			let SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
-			let SCREEN_WIDTH = window.innerWidth;
+///get current time
+//write function that return new camera posion when time passed
+//we want to go from (x1, y1, z1) -> (x2, y2, z2) in 5 mins
 
-			let camera, controls, scene, renderer, stats;
-			let geometry, meshPlanet, meshClouds, meshMoon;
-			let dirLight;
+// 5mins become 120 seconds 
+// x = (x2-x1) / (time / 120)
+//y = (y2 - y1) / (time /120)
+// z= (z2-z1)/ (time/120)
 
-			let composer;
+// x += x1;
+// y+= y1;
+// z +z1 ;
 
-			const textureLoader = new THREE.TextureLoader();
 
-			let d, dPlanet, dMoon;
-			const dMoonVec = new THREE.Vector3();
 
-			const clock = new THREE.Clock();
+const MARGIN = 0;
+let SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
+let SCREEN_WIDTH = window.innerWidth;
 
-			init();
-			animate();
+let camera, controls, scene, renderer, stats;
+let geometry, meshPlanet, meshClouds, meshMoon;
+let dirLight;
 
-			function init() {
+let composer;
 
-				camera = new THREE.PerspectiveCamera( 25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7 );
-				camera.position.z = radius * 15;
-				camera.position.x = 
-                // camera.position.x = radius * 15;
-                camera.rotation.z= 180 * Math.PI / 90
-                camera.rotation.x= 180 * Math.PI / 90
-                // camera.lookAt(meshPlanet.position)
-                // camera.rotation.x= 90 * Math.PI / 90
-				scene = new THREE.Scene();
-				scene.fog = new THREE.FogExp2( 0x000000, 0.00000025 );
+const textureLoader = new THREE.TextureLoader();
 
-				dirLight = new THREE.DirectionalLight( 0xffffff );
-				dirLight.position.set( - 1, 0, 1 ).normalize();
-				scene.add( dirLight );
+let d, dPlanet, dMoon;
+const dMoonVec = new THREE.Vector3();
 
-				const materialNormalMap = new THREE.MeshPhongMaterial( {
+const clock = new THREE.Clock();
+let movementSpeed = 100;
 
-					specular: 0x333333,
-					shininess: 15,
-					map: textureLoader.load( "./assets/earth_atmos_2048.jpg" ),
-					specularMap: textureLoader.load( "./assets/earth_specular_2048.jpg" ),
-					normalMap: textureLoader.load( "./assets/earth_normal_2048.jpg" ),
+// let posionStop = {x: 26106 , y:793.3826641245728 , z : }
 
-					// y scale is negated to compensate for normal map handedness.
-					normalScale: new THREE.Vector2( 0.85, - 0.85 )
+//endposition when animation stop
+let endPosition = { x: 24241, y: 793, z: 19532 }
+//start postion
+let startPosition = { x: 0, y: 19, z: 100240 };
+//time the animation take
+let timeToTravel = 30;
 
-				} );
 
-				// planet
+init();
+animate();
 
-				geometry = new THREE.SphereBufferGeometry( radius, 100, 50 );
+function getNextCameraPostion(delta) {
+	// console.log("delta=>", delta);
 
-				meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
-				meshPlanet.rotation.y = 0;
-				meshPlanet.rotation.z = tilt;
-				scene.add( meshPlanet );
+	let { x, y, z } = startPosition;
+	let xdiff = endPosition.x - startPosition.x;
+	let ydiff = endPosition.y - startPosition.y;
+	let zdiff = endPosition.z - startPosition.z;
 
-				// clouds
+	const mult = Math.min(delta / timeToTravel, 1);
 
-				const materialClouds = new THREE.MeshLambertMaterial( {
 
-					map: textureLoader.load( "./assets/earth_clouds_1024.png" ),
-					transparent: true
+	const newX = x + mult * xdiff;
+	const newY = y + mult * ydiff;
+	const newZ = z + mult * zdiff;
+	console.log(JSON.stringify({ x : newX, y: newY, z: newZ }));
+	// return startPosition;
+	return { x : newX, y: newY, z: newZ };
+}
 
-				} );
+function init() {
+	camera = new THREE.PerspectiveCamera(25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7);
+	camera.position.z = radius * 15;
+	camera.position.x =
 
-				meshClouds = new THREE.Mesh( geometry, materialClouds );
-				meshClouds.scale.set( cloudsScale, cloudsScale, cloudsScale );
-				meshClouds.rotation.z = tilt;
-				scene.add( meshClouds );
+		camera.rotation.z = 180 * Math.PI / 90
+	camera.rotation.x = 180 * Math.PI / 90
+	// camera.lookAt(meshPlanet.position)
+	// camera.rotation.x= 90 * Math.PI / 90
+	scene = new THREE.Scene();
+	scene.fog = new THREE.FogExp2(0x000000, 0.00000025);
 
-				// moon
+	dirLight = new THREE.DirectionalLight(0xffffff);
+	dirLight.position.set(- 1, 0, 1).normalize();
+	scene.add(dirLight);
 
-				const materialMoon = new THREE.MeshPhongMaterial( {
+	const materialNormalMap = new THREE.MeshPhongMaterial({
 
-					map: textureLoader.load( "./assets/moon_1024.jpg" )
+		specular: 0x333333,
+		shininess: 15,
+		map: textureLoader.load("./assets/earth_atmos_2048.jpg"),
+		specularMap: textureLoader.load("./assets/earth_specular_2048.jpg"),
+		normalMap: textureLoader.load("./assets/earth_normal_2048.jpg"),
 
-				} );
+		// y scale is negated to compensate for normal map handedness.
+		normalScale: new THREE.Vector2(0.85, - 0.85)
 
-				meshMoon = new THREE.Mesh( geometry, materialMoon );
-				meshMoon.position.set( radius * 5, 0, 0 );
-				meshMoon.scale.set( moonScale, moonScale, moonScale );
-				scene.add( meshMoon );
-				
+	});
 
-				// stars
+	// planet
 
-				const r = radius, starsGeometry = [ new THREE.BufferGeometry(), new THREE.BufferGeometry() ];
+	geometry = new THREE.SphereBufferGeometry(radius, 100, 50);
 
-				const vertices1 = [];
-				const vertices2 = [];
+	meshPlanet = new THREE.Mesh(geometry, materialNormalMap);
+	meshPlanet.rotation.y = 0;
+	meshPlanet.rotation.z = tilt;
+	scene.add(meshPlanet);
 
-				const vertex = new THREE.Vector3();
+	// clouds
 
-				for ( let i = 0; i < 250; i ++ ) {
+	const materialClouds = new THREE.MeshLambertMaterial({
 
-					vertex.x = Math.random() * 2 - 1;
-					vertex.y = Math.random() * 2 - 1;
-					vertex.z = Math.random() * 2 - 1;
-					vertex.multiplyScalar( r );
+		map: textureLoader.load("./assets/earth_clouds_1024.png"),
+		transparent: true
 
-					vertices1.push( vertex.x, vertex.y, vertex.z );
+	});
 
-				}
+	meshClouds = new THREE.Mesh(geometry, materialClouds);
+	meshClouds.scale.set(cloudsScale, cloudsScale, cloudsScale);
+	meshClouds.rotation.z = tilt;
+	scene.add(meshClouds);
 
-				for ( let i = 0; i < 1500; i ++ ) {
+	// moon
 
-					vertex.x = Math.random() * 2 - 1;
-					vertex.y = Math.random() * 2 - 1;
-					vertex.z = Math.random() * 2 - 1;
-					vertex.multiplyScalar( r );
+	const materialMoon = new THREE.MeshPhongMaterial({
 
-					vertices2.push( vertex.x, vertex.y, vertex.z );
+		map: textureLoader.load("./assets/moon_1024.jpg")
 
-				}
+	});
 
-				starsGeometry[ 0 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices1, 3 ) );
-				starsGeometry[ 1 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices2, 3 ) );
+	meshMoon = new THREE.Mesh(geometry, materialMoon);
+	meshMoon.position.set(radius * 5, 0, 0);
+	meshMoon.scale.set(moonScale, moonScale, moonScale);
+	scene.add(meshMoon);
 
-				const starsMaterials = [
-					new THREE.PointsMaterial( { color: 0x555555, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x555555, size: 1, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x333333, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x3a3a3a, size: 1, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x1a1a1a, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x1a1a1a, size: 1, sizeAttenuation: false } )
-				];
 
-				for ( let i = 10; i < 1000; i ++ ) {
+	// stars
 
-					const stars = new THREE.Points( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
+	const r = radius, starsGeometry = [new THREE.BufferGeometry(), new THREE.BufferGeometry()];
 
-					stars.rotation.x = Math.random() * 6;
-					stars.rotation.y = Math.random() * 6;
-					stars.rotation.z = Math.random() * 6;
-					stars.scale.setScalar( i * 1 );
+	const vertices1 = [];
+	const vertices2 = [];
 
-					stars.matrixAutoUpdate = false;
-					stars.updateMatrix();
+	const vertex = new THREE.Vector3();
 
-					scene.add( stars );
+	for (let i = 0; i < 250; i++) {
 
-				}
+		vertex.x = Math.random() * 2 - 1;
+		vertex.y = Math.random() * 2 - 1;
+		vertex.z = Math.random() * 2 - 1;
+		vertex.multiplyScalar(r);
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				document.body.appendChild( renderer.domElement );
+		vertices1.push(vertex.x, vertex.y, vertex.z);
 
-				//
+	}
 
-				controls = new FlyControls( camera, renderer.domElement );
+	for (let i = 0; i < 1500; i++) {
 
-				controls.movementSpeed = 1000;
-				controls.domElement = renderer.domElement;
-				controls.rollSpeed = Math.PI / 54;
-				controls.autoForward = false;
-				controls.dragToLook = false;
+		vertex.x = Math.random() * 2 - 1;
+		vertex.y = Math.random() * 2 - 1;
+		vertex.z = Math.random() * 2 - 1;
+		vertex.multiplyScalar(r);
 
-				//
+		vertices2.push(vertex.x, vertex.y, vertex.z);
 
-				stats = new Stats();
-				document.body.appendChild( stats.dom );
+	}
 
-				window.addEventListener( 'resize', onWindowResize, false );
+	starsGeometry[0].setAttribute('position', new THREE.Float32BufferAttribute(vertices1, 3));
+	starsGeometry[1].setAttribute('position', new THREE.Float32BufferAttribute(vertices2, 3));
 
-				// postprocessing
+	const starsMaterials = [
+		new THREE.PointsMaterial({ color: 0x555555, size: 2, sizeAttenuation: false }),
+		new THREE.PointsMaterial({ color: 0x555555, size: 1, sizeAttenuation: false }),
+		new THREE.PointsMaterial({ color: 0x333333, size: 2, sizeAttenuation: false }),
+		new THREE.PointsMaterial({ color: 0x3a3a3a, size: 1, sizeAttenuation: false }),
+		new THREE.PointsMaterial({ color: 0x1a1a1a, size: 2, sizeAttenuation: false }),
+		new THREE.PointsMaterial({ color: 0x1a1a1a, size: 1, sizeAttenuation: false })
+	];
 
-				const renderModel = new RenderPass( scene, camera );
-				const effectFilm = new FilmPass( 0.35, 0.75, 2048, false );
+	for (let i = 10; i < 1000; i++) {
 
-				composer = new EffectComposer( renderer );
+		const stars = new THREE.Points(starsGeometry[i % 2], starsMaterials[i % 6]);
 
-				composer.addPass( renderModel );
-				composer.addPass( effectFilm );
+		stars.rotation.x = Math.random() * 6;
+		stars.rotation.y = Math.random() * 6;
+		stars.rotation.z = Math.random() * 6;
+		stars.scale.setScalar(i * 1);
 
-			}
+		stars.matrixAutoUpdate = false;
+		stars.updateMatrix();
 
-			function onWindowResize() {
+		scene.add(stars);
 
-				SCREEN_HEIGHT = window.innerHeight;
-				SCREEN_WIDTH = window.innerWidth;
+	}
 
-				camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
-				camera.updateProjectionMatrix();
+	renderer = new THREE.WebGLRenderer({ antialias: true });
+	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	document.body.appendChild(renderer.domElement);
 
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				composer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+	//
 
-			}
+	controls = new FlyControls(camera, renderer.domElement);
 
-			function animate() {
+	controls.domElement = renderer.domElement;
+	controls.rollSpeed = Math.PI / 54;
+	controls.autoForward = true;
+	controls.dragToLook = true;
+	controls.movementSpeed = 0;
 
-				requestAnimationFrame( animate );
+	//
 
-				render();
-				stats.update();
+	// controls = new OrbitControls(camera, renderer.domElement)
 
-			}
+	stats = new Stats();
+	document.body.appendChild(stats.dom);
 
-			function render() {
+	window.addEventListener('resize', onWindowResize, false);
+	window.addEventListener('keydown', (e) => {
+		console.log(e.which);
+		if (movementSpeed && e.which == 32) {
+			console.log('im here');
 
-				// rotate the planet and clouds
+			movementSpeed = 0;
+		} else if (!movementSpeed && e.which == 32) {
+			movementSpeed = 100;
+		}
+	})
 
-				const delta = clock.getDelta();
+	// postprocessing
 
-				meshPlanet.rotation.y += rotationSpeed * delta;
-				meshClouds.rotation.y += 1.25 * rotationSpeed * delta;
+	const renderModel = new RenderPass(scene, camera);
+	const effectFilm = new FilmPass(0.35, 0.75, 2048, false);
 
-				// slow down as we approach the surface
+	composer = new EffectComposer(renderer);
 
-				dPlanet = camera.position.length();
+	composer.addPass(renderModel);
+	composer.addPass(effectFilm);
 
-				dMoonVec.subVectors( camera.position, meshMoon.position );
-				dMoon = dMoonVec.length();
+	console.log(camera.position);
 
-				if ( dMoon < dPlanet ) {
+}
 
-					d = ( dMoon - radius * moonScale * 1.01 );
+function onWindowResize() {
 
-				} else {
+	SCREEN_HEIGHT = window.innerHeight;
+	SCREEN_WIDTH = window.innerWidth;
 
-					d = ( dPlanet - radius * 1.01 );
+	camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+	camera.updateProjectionMatrix();
 
-				}
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	composer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-				controls.movementSpeed = 0.13 * d;
-				controls.update( delta );
+}
 
-				composer.render( delta );
+function animate() {
 
-            }
-            
+	requestAnimationFrame(animate);
 
-            
+	render();
+	stats.update();
+
+}
+
+function render() {
+
+	// rotate the planet and clouds
+
+	const delta = clock.getDelta();
+
+	meshPlanet.rotation.y += rotationSpeed * delta;
+	meshClouds.rotation.y += 1.25 * rotationSpeed * delta;
+
+	// slow down as we approach the surface
+
+	dPlanet = camera.position.length();
+
+	dMoonVec.subVectors(camera.position, meshMoon.position);
+	dMoon = dMoonVec.length();
+
+	if (dMoon < dPlanet) {
+
+		d = (dMoon - radius * moonScale * 1.01);
+
+	} else {
+
+		d = (dPlanet - radius * 1.01);
+
+	}
+
+
+	// if(movementSpeed)
+	// 	controls.movementSpeed = 0.13 * d;
+	// else controls.movementSpeed = 0;
+	// console.log(camera.position);
+	controls.update(delta);
+
+	let pos = getNextCameraPostion(clock.getElapsedTime());
+
+	camera.position.x = pos.x;
+	camera.position.y = pos.y;
+	camera.position.z = pos.z;
+	
+	//log the camera position
+	// console.log(camera.position);
+
+	composer.render(delta);
+
+}
+
+

@@ -1,5 +1,10 @@
 let express = require('express');
 let app = express();
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+let p5Sketches= [];
+
 let fs = require("fs");
 const Datastore = require('nedb');
 
@@ -26,9 +31,45 @@ let adminPassword = '1234';
 //Initialize socket.io
 let io = require('socket.io').listen(server);
 
+// add a route on server, that is lstening to a post request
+app.post('/p5sketch', (req, res) => {
+console.log(req.body);
+let currentDate = Date();
+let p5Obj = {
+name: req.body.name,
+date: currentDate,
+sketch: req.body.uri
+}
+
+
+p5Sketches.push(p5Obj);
+console.log(p5Obj);
+res.json({task:"success"});
+})
+
+// add route to get all the sketches
+app.get('/getSketches', (req,res)=>{
+    let obj = {data: p5Sketches}
+    res.json(obj);
+})
+
+
+
 //Listen for individual clients/users to connect
 io.sockets.on('connection', function(socket) {
     console.log("We have a new client: " + socket.id);
+    let connectedUsersCount = Object.keys(io.sockets.sockets).length;
+
+    let currentShips = connectedUsersCount;
+    console.log(currentShips);
+    //send back to client to tell them what number ship they are
+    socket.emit('shipNum', {ships: currentShips});
+    // tell everybody else what ship they are
+    socket.broadcast.emit('otherShipNum', {ships: currentShips});
+    //assign each id a ship number
+    
+
+
     let watch = new Stopwatch(io);
 
     //Listen for password authentication from the client
@@ -39,6 +80,16 @@ io.sockets.on('connection', function(socket) {
             io.to(socket.id).emit('authentication', true);
         }
     });
+
+    socket.on('rotationPos', function(obj){
+        socket.broadcast.emit('rotationPos', {obj});
+    } )
+    socket.on('rotationNeg', function(obj){
+        socket.broadcast.emit('rotationNeg', {obj});
+    } )
+    socket.on('boost', function(obj){
+        socket.broadcast.emit('boost', {obj});
+    } )
 
     //Listen for a message named 'msg' from this client
     socket.on('msg', function(data) {
