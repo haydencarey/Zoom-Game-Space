@@ -12,6 +12,7 @@ window.addEventListener('load', function() {
     
     toggleButton.style.display = 'none';
     resetButton.style.display = 'none';
+    getSketches.style.display = 'none';
     // nextStepBtn.style.display = 'none';
     // var socketId = null;
 
@@ -33,6 +34,7 @@ window.addEventListener('load', function() {
            
             toggleButton.style.display = 'inline-block';
             resetButton.style.display = 'inline-block';
+            getSketches.style.display = 'inline-block';
         }
     });
 

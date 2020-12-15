@@ -79,6 +79,7 @@
         
         .sub-container {
             width: 50%;
+            margin-top: 2%;
         }
         
         button {
@@ -183,7 +184,7 @@
         
         h2 {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
   
@@ -207,7 +208,7 @@ text-align: center;
 }
 .right-wrapper{
     flex: 2;
-    margin-top: 3%;
+    margin-top: 6%;
     margin-right: 5%;
 }
   .wrapper{

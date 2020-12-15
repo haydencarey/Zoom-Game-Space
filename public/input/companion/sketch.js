@@ -1,6 +1,7 @@
 let c = "black";
 let mousePos;
 let myCanvas;
+let getSketches;
 
 
 function setup() {
@@ -27,8 +28,8 @@ function setup() {
   y.appendChild(s);
   document.body.appendChild(y);
 
-  let getSketches = document.getElementById("get-sketches")
-  let clickMe = document.getElementById("click-me")
+  getSketches = document.getElementById("get-sketches");
+  let clickMe = document.getElementById("click-me");
 
 
   // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNby

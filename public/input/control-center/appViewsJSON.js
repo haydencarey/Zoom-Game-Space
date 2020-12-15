@@ -93,7 +93,7 @@ function renderImage(views, count) {
     } else if(views[count].Utu){
         missionBox.innerHTML = '<iframe class="space-frame" src="/input/SpacecraftTest/index.html" scrolling="no"></iframe>';
     }
-        else if (views[count].danger) {git
+        else if (views[count].danger) {
         missionBox.innerHTML = `  <img class="my-img" src=${ views[count].danger}>`
             // audio19.play();
         socket.emit('danger', {
