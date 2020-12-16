@@ -2,12 +2,14 @@ let c = "black";
 let mousePos;
 let myCanvas;
 let getSketches;
+let sketchObj;
 
 
 function setup() {
   // console.log(namePrompt);
   console.log("setup")
-  myCanvas = createCanvas(window.innerWidth * .50, window.innerHeight * .50);
+  myCanvas = createCanvas(804, 490);
+  myCanvas.parent('sketch-holder');
 
   console.log(myCanvas);
   // document.getElementById("defaultCanvas0").style.width = "75%";
@@ -20,13 +22,13 @@ function setup() {
   x.setAttribute("id", "click-me");
   let t = document.createTextNode("Input");
   x.appendChild(t);
-  document.body.appendChild(x);
+  document.getElementById("sketch-buttons").appendChild(x);
 
   let y = document.createElement("Button");
   y.setAttribute("id", "get-sketches");
   let s = document.createTextNode("Get Sketches");
   y.appendChild(s);
-  document.body.appendChild(y);
+  document.getElementById("sketch-buttons").appendChild(y);
 
   getSketches = document.getElementById("get-sketches");
   let clickMe = document.getElementById("click-me");
@@ -67,6 +69,33 @@ function setup() {
 
   })
 
+  //listen for messages from the server
+  socket.on('sketchMsg', function(data){
+    console.log("Message arrived!");
+    
+    for (let i = 0; i < data.length; i++) {
+      let stringSketch = data[i].sketch;
+      let stringName = data[i].name;
+      //document.getElementById("sketch").src= string;
+      let imageHolder = document.createElement("div");
+      let name = document.createElement('h2');
+      name.innerHTML = stringName;
+      let img = document.createElement('img');
+    
+      img.src = stringSketch;
+      imageHolder.appendChild(name);
+    
+      name.classList.add("name-gallery");
+      imageHolder.appendChild(img);
+      img.classList.add("image-gallery");
+      document.getElementById("gallery").appendChild(imageHolder)
+      imageHolder.classList.add("image-box");
+      // console.log("inserted");
+      
+    }
+    
+  } )
+
   getSketches.addEventListener('click', function () {
     console.log("get sketches")
     //  get info on all the sketches
@@ -74,11 +103,31 @@ function setup() {
       .then(resp => resp.json())
       .then(data => {
         console.log(data.data)
-        for (let i =0; i<data.data.length; i++){
-          let string = data.data[i].sketch;
-          document.getElementById("sketch").src= string;
-        }
+        socket.emit('sketchMsg', data.data);
+        // sketchObj = {
+        //       "data": data.data
+        //     }
+        // for (let i = 0; i < data.data.length; i++) {
+        //   let stringSketch = data.data[i].sketch;
+        //   let stringName = data.data[i].name;
+        //   //document.getElementById("sketch").src= string;
+        //   let name = document.createElement('h2');
+        //   name.innerHTML = stringName;
+        //   let img = document.createElement('img');
+        
+        //   img.src = stringSketch;
+        //   document.getElementById('gallery').appendChild(name);
+        //   document.getElementById('gallery').appendChild(img);
+          
+        //   sketchObj = {
+        //     "name": document.getElementById('gallery').appendChild(name),
+        //     "sketch": document.getElementById('gallery').appendChild(img)
+        //   }
+        //   // console.log("inserted");
+        // }
       })
+      // send message to the server
+      
   })
 
 
@@ -149,7 +198,7 @@ function mouseDragged() {
 
     line(mouseX, mouseY, pmouseX, pmouseY);
 
-    console.log('sending' + mouseX + ',' + mouseY)
+    // console.log('sending' + mouseX + ',' + mouseY)
     // creating the object
     // mousePos = {
     //   "x": mouseX,

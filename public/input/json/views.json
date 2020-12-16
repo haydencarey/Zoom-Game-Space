@@ -25,13 +25,6 @@
         "stage": "Asteroid Belt",
         "link": "./images/asteroid.jpg"
     },
-    
-    {
-        "id": "woromhole",
-        "stage": "Hyperspeed",
-        "link": "./images/asteroid.jpg",
-        "wormhole": true
-    },
 
     {
         "id": "landing",

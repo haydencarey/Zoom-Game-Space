@@ -3,7 +3,6 @@
             font-family: Space Mono;
             color: whitesmoke;
         }
-       
         
         h1 {
             font-family: Space Age;
@@ -39,13 +38,12 @@
             width: 50%;
             height: 548px;
             margin-top: 10px;
-            
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 1%;
         }
-
-        #click-me{
+        
+        #click-me {
             margin-left: 48%;
             margin-bottom: 5%;
         }
@@ -186,33 +184,61 @@
             text-align: center;
             margin-top: 20px;
         }
+        
+        #timer {
+            font-size: 45px;
+            font-family: Space Mono;
+        }
+        
+        .timer-buttons {
+            margin-top: -20px;
+        }
+        
+        .timer-div {
+            text-align: center;
+        }
+        
+        .logo {
+            max-width: 15%;
+            margin-left: 28%;
+            height: auto;
+            flex: 1;
+        }
+        
+        .right-wrapper {
+            flex: 2;
+            margin-top: 6%;
+            margin-right: 5%;
+        }
+        
+        .wrapper {
+            margin-top: -3%;
+            display: flex;
+            margin-left: -191px;
+        }
+        
+        .gallery-box {
+            border: 7px solid whitesmoke;
+            height: 100%;
+            margin-left: 25px;
+            margin-right: 25px;
+            padding-left: 5px;
+            
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
 
-  
-  #timer {
-    font-size: 45px;
-    font-family: Space Mono;
-  }
-  .timer-buttons{
-margin-top: -20px;
-  }
-
-.timer-div{
-text-align: center;
-}
-
-.logo{
-    max-width: 15%;
-    margin-left: 28%;
-    height: auto;
-    flex: 1;
-}
-.right-wrapper{
-    flex: 2;
-    margin-top: 6%;
-    margin-right: 5%;
-}
-  .wrapper{
-      margin-top: -3%;
-      display: flex;
-      margin-left: -191px;
-  }
+        #sketch{
+            width: 25%;
+            height: 25%;
+        }
+        .image-box{
+            width:30%;
+            height: 100%;
+        }
+        .image-gallery{
+            width: 100%;
+            height:100%;
+        }
+        

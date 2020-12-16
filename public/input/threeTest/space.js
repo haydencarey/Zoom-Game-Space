@@ -7,6 +7,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/cont
 import { EffectComposer } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/RenderPass.js';
 import { FilmPass } from 'https://unpkg.com/three@0.117.0/examples/jsm/postprocessing/FilmPass.js';
+import { Lensflare, LensflareElement } from 'https://unpkg.com/three@0.117.0/examples/jsm/objects/Lensflare.js';
 
 const radius = 6571;
 const tilt = 0.41;
@@ -46,20 +47,25 @@ let d, dPlanet, dMoon;
 const dMoonVec = new THREE.Vector3();
 
 const clock = new THREE.Clock();
-let movementSpeed = 100;
+let movementSpeed = 200;
 
 // let posionStop = {x: 26106 , y:793.3826641245728 , z : }
 
 //endposition when animation stop
-let endPosition = { x: 24241, y: 793, z: 19532 }
+let endPosition = { x: 80000, y: 793, z: -100000 }
 //start postion
 let startPosition = { x: 0, y: 19, z: 100240 };
 //time the animation take
-let timeToTravel = 30;
+let timeToTravel =+ 40;
 
 
 init();
 animate();
+
+// setTimeout(function(){
+// 	}, 5000);
+
+// setTimeout(function(){audio2.play()},3000);
 
 function getNextCameraPostion(delta) {
 	// console.log("delta=>", delta);
@@ -92,9 +98,37 @@ function init() {
 	scene = new THREE.Scene();
 	scene.fog = new THREE.FogExp2(0x000000, 0.00000025);
 
-	dirLight = new THREE.DirectionalLight(0xffffff);
+	dirLight = new THREE.DirectionalLight(0xffffff,1);
 	dirLight.position.set(- 1, 0, 1).normalize();
 	scene.add(dirLight);
+
+	// lensflares
+	const textureLoader = new THREE.TextureLoader();
+
+	const textureFlare0 = textureLoader.load( './assets/lensflare0.png' );
+	const textureFlare3 = textureLoader.load( './assets/lensflare3.png' );
+
+	addLight( 0.55, 0.9, 0.5, 5000, 0, - 1000 );
+	addLight( 0.08, 0.8, 0.5, 0, 0, - 1000 );
+	addLight( 0.995, 0.5, 0.9, 5000, 5000, - 1000 );
+
+	function addLight( h, s, l, x, y, z ) {
+
+		const light = new THREE.DirectionalLight( 0xffffff, .5, 2000 );
+		light.color.setHSL( h, s, l );
+		light.position.set( 350000, 793, -1000000 ); 
+		// x: 80000, y: 793, z: -100000 
+		scene.add( light );
+
+		const lensflare = new Lensflare();
+		lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, light.color ) );
+		lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+		lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+		lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+		lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+		light.add( lensflare );
+
+	}
 
 	const materialNormalMap = new THREE.MeshPhongMaterial({
 
@@ -215,7 +249,7 @@ function init() {
 	controls = new FlyControls(camera, renderer.domElement);
 
 	controls.domElement = renderer.domElement;
-	controls.rollSpeed = Math.PI / 54;
+	controls.rollSpeed = Math.PI / 10;
 	controls.autoForward = true;
 	controls.dragToLook = true;
 	controls.movementSpeed = 0;

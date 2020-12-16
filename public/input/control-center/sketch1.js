@@ -18,9 +18,6 @@ socket.on('shipNum', function (data) {
     myShipNum = data.ships - 1;
     console.log(myShipNum);
     readyGo = true;
-    
-
-
 })
 
 
@@ -104,16 +101,14 @@ function asteroidGame() {
 
         if (readyGo) {
 
-            for (var i = 0; i < asteroids.length; i++) {
+            for (var i = 0; i < asteroids.length; i+=1) {
 
                 if (ships[myShipNum].hits(asteroids[i])) {
-                    console.log('ooops!');
-                    // asteroids.push(new Asteroid());
+                    // console.log('ooops!');
+                    asteroids.push(new Asteroid());
 
 
                 }
-
-
                 asteroids[i].render();
                 asteroids[i].update();
                 asteroids[i].edges();
@@ -218,7 +213,9 @@ function asteroidGame() {
 
 function keyReleased() {
     ships[myShipNum].setRotation(0);
+    socket.emit('rotationStop', { num: myShipNum });
     ships[myShipNum].boosting(false);
+    socket.emit('boostStop', { num: myShipNum });
 }
 
 // three instances of emit:
@@ -232,7 +229,6 @@ if (readyGo){
         socket.emit('rotationPos', { num: myShipNum });
     } else if (keyCode == 65) {
         ships[myShipNum].setRotation(-0.1);
-
         socket.emit('rotationNeg', { num: myShipNum });
         //emit ship.rotation
     } else if (keyCode == 87) {
@@ -273,27 +269,33 @@ socket.on('authentication', function (data) {
             asteroidButton.style.display = 'flex';
         }
     }, 1000)
-
-
 });
 
 
 socket.on('rotationPos', function (data) {
+    console.log(data);
     ships[data.num].setRotation(0.1);
-
 })
 
 
 socket.on('rotationNeg', function (data) {
+    console.log(data);
     ships[data.num].setRotation(-0.1);
-
 })
 
 
 socket.on('boost', function (data) {
     console.log(data);
     ships[data.num].boosting(true);
+})
 
+socket.on('rotationStop', function (data) {
+    console.log(data);
+    ships[data.num].setRotation(0);
+})
+socket.on('boostStop', function (data) {
+    console.log(data);
+    ships[data.num].boosting(false);
 })
 
 
