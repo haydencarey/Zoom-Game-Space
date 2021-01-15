@@ -1,6 +1,6 @@
 # DOCUMENTATION
 
-## Introudction 
+## Introduction 
 
 For project 2 and 3, I was immediately drawn to the concept of creating synergy between Connections Lab and Critical Experiences. I will briefly describe my intentions for my Critical Experiences Project.
 
